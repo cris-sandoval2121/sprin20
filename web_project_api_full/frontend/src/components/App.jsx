@@ -44,8 +44,8 @@ function App() {
     api.setToken(storedToken);
 
     checkToken(storedToken)
-      .then(({ data }) => {
-        setCurrentUser(data);
+      .then((userResponse) => {
+        setCurrentUser(userResponse.data || userResponse);
         setIsLoggedIn(true);
       })
       .catch((error) => {
@@ -76,9 +76,9 @@ function App() {
       .getUserInfo()
       .then((userData) => {
         setCurrentUser((currentUser) => ({
-  ...currentUser,
-  ...(userData.data || userData),
-}));
+          ...currentUser,
+          ...(userData.data || userData),
+        }));
       })
       .catch((error) => {
         console.error("Error al obtener los datos del usuario:", error);
@@ -199,7 +199,7 @@ function App() {
       // Obtener información del usuario
       const userResponse = await checkToken(newToken);
 
-      setCurrentUser(userResponse.data);
+      setCurrentUser(userResponse.data || userResponse);
       setIsLoggedIn(true);
     } catch (error) {
       console.error("Error al iniciar sesión:", error);

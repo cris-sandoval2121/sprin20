@@ -1,14 +1,11 @@
-﻿const API_TOKEN = "d2be4f63-e9e5-4483-87a2-11d28a142413";
-
-class Api {
+﻿class Api {
   constructor(options) {
     this._baseUrl = options.baseUrl;
     this._headers = { ...options.headers };
   }
 
   setToken(token) {
-    this._headers.authorization = token ? API_TOKEN : "";
-    delete this._headers.Authorization;
+    this._headers.Authorization = token ? `Bearer ${token}` : "";
   }
 
   _checkResponse(res) {
@@ -93,10 +90,10 @@ class Api {
 }
 
 const api = new Api({
-  baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  baseUrl: import.meta.env.VITE_API_URL || "http://localhost:3000",
   headers: {
     "Content-Type": "application/json",
-    authorization: API_TOKEN,
+    Authorization: "",
   },
 });
 

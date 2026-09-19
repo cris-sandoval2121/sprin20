@@ -1,4 +1,4 @@
-const AUTH_BASE_URL = "https://se-register-api.en.tripleten-services.com/v1";
+const AUTH_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
 const normalizeCredentials = async ({ email, password }) => {
   const normalizedEmail = String(email || "").trim();
