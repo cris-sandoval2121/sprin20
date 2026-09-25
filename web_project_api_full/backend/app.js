@@ -21,6 +21,7 @@ const MONGO_URL = process.env.MONGO_URL || "mongodb://localhost:27017/aroundb";
 app.use(requestLogger);
 app.use(express.json());
 app.use(cors());
+app.options("{*splat}", cors());
 
 mongoose.connect(MONGO_URL);
 

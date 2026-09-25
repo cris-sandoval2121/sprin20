@@ -44,7 +44,13 @@ export const createUser = async (req, res, next) => {
       about,
       avatar,
     });
-    res.status(201).send(user);
+
+
+    const userWithoutPassword = user.toObject();
+    delete userWithoutPassword.password;
+
+    res.status(201).send(userWithoutPassword);
+
   } catch (error) {
     next(error);
   }
